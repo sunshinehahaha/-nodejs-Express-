@@ -1,0 +1,19 @@
+ if(!req.session.username){
+    res.render("index",{});
+    return;
+  }
+
+  JobModel.findById(req.query.id,(err,post)=>{
+     if (!err) {
+        post.remove(function(err){
+      var result = {
+        code: 1
+      }
+      if(err) {
+        result.code = -109;
+        result.message = "É¾³ýÊ§°Ü!";
+      }
+      res.send(JSON.stringify(result));
+      });
+    }
+  })

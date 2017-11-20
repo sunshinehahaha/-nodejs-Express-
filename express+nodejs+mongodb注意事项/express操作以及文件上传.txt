@@ -1,0 +1,80 @@
+Express 基于 Node.js 平台，快速、开放、极简的 web 开发框架。
+http://www.expressjs.com.cn/
+
+首先
+
+npm install express-generator -g
+
+生成项目
+express 工程名 -e
+
+端口号修改
+bin\www 中修改
+
+文件上传::::::::::::::::::::::::::::::::::::::::
+安装
+cnpm install multiparty --save
+
+在ejs文件中写上；并引入jquery.form.min.js 
+
+<form id="frm" action="/main/upload" enctype="multipart/form-data" method="post">
+//每一个元素都要写上name属性
+</form>
+
+routes/main.js文件中
+
+router.post('/upload', function(req, res, next) {
+	var result ={
+		code:1
+	}
+	var form = new multiparty.Form({uploadDir:"./public/images/"});
+	form.parse(req, function(err, fields, files) {
+	    if(err){
+	        result.code = -100;
+	        result.message = "错误错误";
+	        console.log(err);
+      	}	
+	      console.log("hahahha");
+	      console.log(fields);
+	      console.log(files);
+	      console.log(files.logo[0].path);
+      	let jobmodel = new JobModel();
+      	jobmodel.logo = files.logo[0].path.replace('public',"");
+      	jobmodel.job = fields.job[0];
+      	jobmodel.company = fields.company[0];
+      	jobmodel.experience = fields.experience[0];
+      	jobmodel.jobtype = fields.jobtype[0];
+      	jobmodel.place = fields.place[0];
+      	jobmodel.salary = fields.salary[0];
+      	jobmodel.save((err)=>{
+        if(err){
+          result.code = -112;
+          result.message ="保存失败";
+        }
+        res.send(JSON.stringify(result));
+    })	
+   })
+})
+
+
+script代码：
+function jobInfo(){
+		var options = { 
+		dataType : "json", 
+		beforeSubmit : function() { 
+			console.log("将来设计一个loading效果"); 
+		}, 
+		success : function(result) { 
+			if(result.code != 1) {
+				alert(result.message);
+				return;
+			}
+			location.reload(true);
+		}, 
+		error : function(result) { 
+		??	console.log("失败");
+		} 
+	}; 
+	$('#frm').ajaxSubmit(options); 
+
+}

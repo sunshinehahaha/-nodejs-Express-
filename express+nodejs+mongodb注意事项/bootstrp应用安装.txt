@@ -1,0 +1,14 @@
+1、全局安装
+npm install -g bower
+2、在项目下执行
+npm install bootstrap
+npm install jquery
+
+jq和boostramp的版本配合有要求。
+使用bower解决版本冲突问题。
+npm install -g bower
+bower info 组件 				查看组件信息，包括所有的版本号。
+bower install 组件#版本号	下载指定版本
+
+使用bootstrap要引入
+引入bootstrap.css bootstrap.js jquery.js

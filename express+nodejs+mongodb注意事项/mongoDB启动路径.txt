@@ -1,0 +1,6 @@
+1、打开D:\mongodb-win32-x86_64-3.0.6\bin 在此处打开cmd命令行窗口
+2、之后执行 mongod --dbpath D:\mongodb-win32-x86_64-3.0.6\data\db
+（数据库数据存在里面）
+3、再在菜单中打开cmd  输入 mongo 
+
+D:\mongodb-win32-x86_64-3.0.6\data\db

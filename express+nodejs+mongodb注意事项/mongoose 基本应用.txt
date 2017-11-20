@@ -1,0 +1,25 @@
+网站：https://github.com/Automattic/mongoose
+
+cnpm install mongoose --save
+在model文件夹中新建一个UserModel.js文件
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var User = new Schema({
+    username : String,
+    psw      : String,
+    email    : String,
+    date     : { type: Date, default: Date.now }
+});
+
+var UserModel = mongoose.model('user', User);
+
+module.exports = UserModel;
+
+
+app.js 
+引用
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/my_database');
